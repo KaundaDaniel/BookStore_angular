@@ -9,7 +9,7 @@ import java.util.Objects;
 @Entity
 public class Book implements Serializable {
 
-
+@Serial
     private static final long serialVersionUID= 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +17,7 @@ public class Book implements Serializable {
     private String title;
     private String name_author;
     private String text;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
     private Category category;
 
