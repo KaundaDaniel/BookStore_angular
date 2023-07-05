@@ -1,5 +1,6 @@
 package com.BookStore.Application.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 
@@ -17,6 +18,7 @@ public class Book implements Serializable {
     private String title;
     private String name_author;
     private String text;
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
     private Category category;
