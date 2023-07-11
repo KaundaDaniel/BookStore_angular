@@ -1,10 +1,12 @@
 package com.BookStore.Application.service;
 
 import com.BookStore.Application.dtos.CatergoryDto;
+import com.BookStore.Application.exceptions.DataIntegrityException;
 import com.BookStore.Application.model.Category;
 import com.BookStore.Application.repository.CategoryRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import com.BookStore.Application.exceptions.ObjectNotfound;
 
@@ -35,6 +37,10 @@ public class CategoryService {
     }
     public void delete(Long id){
         findById(id);
+    try {
         categoryRepository.deleteById(id);
+    }catch (DataIntegrityViolationException e){
+        throw new DataIntegrityException("categoria não pode ser apagado");
+    }
     }
 }
