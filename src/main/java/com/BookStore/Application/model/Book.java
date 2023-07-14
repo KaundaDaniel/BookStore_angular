@@ -19,7 +19,7 @@ public class Book implements Serializable {
     private String name_author;
     private String text;
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "category_id")
     private Category category;
 

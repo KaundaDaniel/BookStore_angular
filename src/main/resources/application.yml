@@ -1,0 +1,5 @@
+
+# Profile using
+spring:
+  profiles:
+    active: test

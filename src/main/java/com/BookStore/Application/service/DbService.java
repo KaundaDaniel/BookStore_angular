@@ -28,7 +28,9 @@ public class DbService {
 
         cat.getBooks().addAll(Arrays.asList(book, book2,book3));
 
-        this.bookRepository.saveAll(Arrays.asList(book, book2, book3));
         this.categoryRepository.saveAll(Arrays.asList(cat, cat2, cat3));
+
+        this.bookRepository.saveAll(Arrays.asList(book, book2, book3));
+
     }
 }

@@ -19,7 +19,7 @@ public class Category implements Serializable {
     private Long id;
     private String name;
     private String description;
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "category")
     private List<Book> books= new ArrayList<>();
 
 
