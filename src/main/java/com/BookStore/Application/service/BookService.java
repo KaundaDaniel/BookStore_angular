@@ -23,4 +23,16 @@ public class BookService {
         categoryService.findById(id_cat);
         return bookRepository.findAllByCategory(id_cat);
     }
+
+    public Book update(Long id, Book book) {
+        Book bookId= findById(id);
+        updateInfo(bookId, book);
+        return bookRepository.save(bookId);
+    }
+
+    private void updateInfo(Book bookId, Book book) {
+        bookId.setName_author(book.getName_author());
+        bookId.setText(book.getText());
+        bookId.setText(book.getText());
+    }
 }
