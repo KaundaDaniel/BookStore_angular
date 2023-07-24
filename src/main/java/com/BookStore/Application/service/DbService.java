@@ -23,12 +23,13 @@ public class DbService {
 
         Book book2 = new Book(null, "cabra da minha Mãe ", "Gilberto Armando", "Dinheiro ajuda o povo", cat2);
         Category cat3 = new Category(null, "Religioso", "Uma abordagem do Mundo Cristão");
+        Category cat4 = new Category(null, "Telecomunicação", "Uma abordagem pelas antenas");
 
         Book book3 = new Book(null, "O que a Biblia realmente Ensina ", "Jeová nosso Deus", "Este curso biblico ajuda voce a de achegar mais de Jeova", cat3);
 
         cat.getBooks().addAll(Arrays.asList(book, book2,book3));
 
-        this.categoryRepository.saveAll(Arrays.asList(cat, cat2, cat3));
+        this.categoryRepository.saveAll(Arrays.asList(cat, cat2, cat3, cat4));
 
         this.bookRepository.saveAll(Arrays.asList(book, book2, book3));
 
