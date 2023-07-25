@@ -2,6 +2,7 @@ package com.BookStore.Application.service;
 
 import com.BookStore.Application.exceptions.ObjectNotfound;
 import com.BookStore.Application.model.Book;
+import com.BookStore.Application.model.Category;
 import com.BookStore.Application.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,5 +35,11 @@ public class BookService {
         bookId.setName_author(book.getName_author());
         bookId.setText(book.getText());
         bookId.setText(book.getText());
+    }
+    public Book create(Long id_cat ,Book book ){
+        book.setId(null);
+        Category cateBook=categoryService.findById(id_cat);
+        book.setCategory(cateBook);
+        return bookRepository.save(book);
     }
 }
