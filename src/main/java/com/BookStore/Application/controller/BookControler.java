@@ -3,6 +3,7 @@ package com.BookStore.Application.controller;
 import com.BookStore.Application.dtos.BookDto;
 import com.BookStore.Application.model.Book;
 import com.BookStore.Application.service.BookService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -31,23 +32,29 @@ public class BookControler {
         return ResponseEntity.ok().body(bookDtoList);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Book> update(@PathVariable Long id,  @RequestBody Book book){
+    public ResponseEntity<Book> update(@Valid @PathVariable Long id,  @RequestBody Book book){
         Book  bookNew= bookService.update(id, book);
         return ResponseEntity.ok().body(bookNew);
     }
     @PatchMapping("/{id}")
-    public ResponseEntity<Book> updatePatch(@PathVariable Long id, @RequestBody  Book book1){
+    public ResponseEntity<Book> updatePatch(@Valid @PathVariable Long id, @RequestBody  Book book1){
     Book bookNew= bookService.update(id, book1);
     return ResponseEntity.ok().body(bookNew);
     }
 
     @PostMapping
-    public ResponseEntity<Book>create(@RequestParam(value = "category", defaultValue = "0")
+    public ResponseEntity<Book>create(@Valid @RequestParam(value = "category", defaultValue = "0")
                                           Long id_cat, @RequestBody Book newBook){
         Book newBook2=bookService.create(id_cat, newBook);
         URI uri= ServletUriComponentsBuilder.fromCurrentContextPath().path("/books/{id}").buildAndExpand(newBook2.getId()).toUri();
         return ResponseEntity.created(uri).build();
 
 
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        bookService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

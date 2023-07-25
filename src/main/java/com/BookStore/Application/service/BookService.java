@@ -42,4 +42,9 @@ public class BookService {
         book.setCategory(cateBook);
         return bookRepository.save(book);
     }
+
+    public void delete(Long id) {
+        Book book= findById(id);
+        bookRepository.deleteById(id);
+    }
 }

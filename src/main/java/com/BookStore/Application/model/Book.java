@@ -2,6 +2,8 @@ package com.BookStore.Application.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Length;
 
 
 import java.io.Serial;
@@ -15,8 +17,14 @@ public class Book implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty(message = "Não poder estar vazio")
+    @Length(min = 3, max = 50, message = "O Titulo deve ser preenchido")
     private String title;
+    @NotEmpty(message = "Não poder estar vazio")
+    @Length(min = 3, max = 50, message = "O nome deve ser preenchido")
     private String name_author;
+    @NotEmpty(message = "Não poder estar vazio")
+    @Length(min = 3, message = "O nome deve ser preenchido")
     private String text;
     @JsonIgnore
     @ManyToOne()
