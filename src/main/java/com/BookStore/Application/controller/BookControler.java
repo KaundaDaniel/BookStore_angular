@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,5 +39,15 @@ public class BookControler {
     public ResponseEntity<Book> updatePatch(@PathVariable Long id, @RequestBody  Book book1){
     Book bookNew= bookService.update(id, book1);
     return ResponseEntity.ok().body(bookNew);
+    }
+
+    @PostMapping
+    public ResponseEntity<Book>create(@RequestParam(value = "category", defaultValue = "0")
+                                          Long id_cat, @RequestBody Book newBook){
+        Book newBook2=bookService.create(id_cat, newBook);
+        URI uri= ServletUriComponentsBuilder.fromCurrentContextPath().path("/books/{id}").buildAndExpand(newBook2.getId()).toUri();
+        return ResponseEntity.created(uri).build();
+
+
     }
 }
