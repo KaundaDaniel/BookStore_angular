@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Length;
 
 
 @Entity
@@ -17,7 +19,11 @@ public class Category implements Serializable {
     @Id
 @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotEmpty(message = "O nome deve ser preenchido")
+    @Length(max = 100, min = 3, message = "O campo nome deve ter no minimo 3 e maximo 100")
     private String name;
+    @NotEmpty(message = "A descrição deve ser preenchido")
+    @Length(min = 5, max = 200, message = "O campo deve ter minimo 5 e maximo de 200")
     private String description;
     @OneToMany(mappedBy = "category")
     private List<Book> books= new ArrayList<>();

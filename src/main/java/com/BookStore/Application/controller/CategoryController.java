@@ -3,6 +3,7 @@ package com.BookStore.Application.controller;
 import com.BookStore.Application.dtos.CatergoryDto;
 import com.BookStore.Application.model.Category;
 import com.BookStore.Application.service.CategoryService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,14 +36,14 @@ public class CategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<Category> create(@RequestBody Category category) {
+    public ResponseEntity<Category> create(@Valid @RequestBody Category category) {
         category = categoryService.create(category);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(category.getId()).toUri();
         return ResponseEntity.created(uri).build();
 
     }
     @PutMapping("/{id}")
-    public ResponseEntity<CatergoryDto>update(@PathVariable Long id, @RequestBody CatergoryDto catergoryDto){
+    public ResponseEntity<CatergoryDto>update(@Valid @PathVariable Long id, @RequestBody CatergoryDto catergoryDto){
         Category category= categoryService.update(id, catergoryDto);
         return ResponseEntity.ok().body(new CatergoryDto(category));
     }

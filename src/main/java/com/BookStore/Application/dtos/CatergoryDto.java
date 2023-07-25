@@ -1,15 +1,22 @@
 package com.BookStore.Application.dtos;
 
 import com.BookStore.Application.model.Category;
+import jakarta.validation.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Length;
 
 import java.io.Serializable;
 
 public class CatergoryDto implements Serializable {
     private static final long serialVersionUID=1L;
     private Long id;
+    @NotEmpty(message = "Não poder estar vazio")
+    @Length(min = 3, max = 80, message = "O nome deve ser preenchido")
     private String name;
+    @NotEmpty(message = "Não poder estar vazio")
+    @Length(min = 3, max = 200, message = "O nome deve ser preenchido")
     private String description;
     public CatergoryDto() {
+
         this.id = id;
         this.name = name;
         this.description = description;
